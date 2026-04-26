@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Emilly 💙</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: #000;
+            color: white; font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-align: center; overflow-x: hidden; min-height: 100vh;
+
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+
+            overflow-y: auto;
+        }
+
+        #fundo-oculos {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+            z-index: -1;
+            transition: opacity 0.8s ease;
+        }
+
+        body::after {
+            content: "";
+            position: fixed; top: 50%; left: 50%;
+            width: 80%; height: 80%;
+            background: radial-gradient(circle, rgba(0, 195, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        h1 { margin: 40px 0 10px; font-size: 38px; text-shadow: 0 0 20px #00c3ff; position: relative; z-index: 1; }
+        .chamada { font-size: 18px; color: #5cc9ff; margin-bottom: 20px; font-style: italic; position: relative; z-index: 1; }
+
+        .cake-container {
+            position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+            height: 350px; margin: 10px auto; z-index: 1;
+        }
+        .plate { width: 300px; height: 40px; background: radial-gradient(ellipse at center, #222 0%, #050505 100%); border-radius: 50%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 195, 255, 0.3); margin-top: -20px; border-bottom: 4px solid #111; }
+        .tier { position: relative; background: linear-gradient(to right, #001a33, #004d7a, #001a33); border: 1px solid rgba(0, 195, 255, 0.3); display: flex; justify-content: center; border-radius: 10px 10px 40% 40% / 10px 10px 20% 20%; margin-bottom: -15px; }
+        .tier::before { content: ""; position: absolute; top: -10px; width: 100%; height: 20px; background: inherit; border-radius: 50%; }
+        .drip { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2; filter: drop-shadow(0 0 5px #00c3ff); clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 95% 55%, 90% 40%, 80% 70%, 70% 40%, 60% 60%, 50% 35%, 40% 80%, 30% 40%, 20% 60%, 10% 40%, 0% 50%); border-radius: 10px 10px 0 0; }
+        .t1 { width: 220px; height: 90px; z-index: 1; }
+        .t2 { width: 160px; height: 80px; z-index: 2; }
+        .t3 { width: 100px; height: 70px; z-index: 3; }
+        .candles { display: flex; gap: 8px; margin-bottom: 2px; z-index: 10; }
+        .candle { width: 8px; height: 35px; background: repeating-linear-gradient(45deg, #00c3ff, #00c3ff 3px, #fff 3px, #fff 6px); border-radius: 2px; position: relative; }
+        .flame { width: 12px; height: 18px; background: #00e5ff; border-radius: 50% 50% 35% 35%; position: absolute; top: -20px; left: -2px; animation: burn 0.3s infinite alternate; box-shadow: 0 0 15px #00c3ff; }
+
+        #btn { padding: 18px 50px; background: transparent; color: #00c3ff; border: 2px solid #00c3ff; border-radius: 50px; font-weight: bold; font-size: 20px; cursor: pointer; text-shadow: 0 0 10px #00c3ff; margin: 40px 0; position: relative; z-index: 10; transition: 0.4s; animation: pulseBtn 2s infinite; }
+        #btn:hover { background: #00c3ff; color: #000; box-shadow: 0 0 30px #00c3ff; }
+
+        .msgFinal { 
+            display: none; position: relative; margin: 30px auto; padding: 40px; 
+            border-radius: 30px; width: 85%; max-width: 550px; border: 2px solid rgba(0, 195, 255, 0.5); 
+            overflow: visible;
+            padding-bottom: 60px;
+            z-index: 20; box-shadow: 0 0 50px rgba(0,0,0,1); 
+        }
+
+        #bg-interno-fotos {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            z-index: -2; transition: background-image 1.2s ease-in-out;
+        }
+
+        .overlay-texto {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); z-index: -1;
+        }
+
+        .texto-declaracao { position: relative; line-height: 1.8; font-size: 18px; z-index: 1; text-shadow: 2px 2px 5px #000; }
+        .frase-especial { font-weight: bold; color: #00e5ff; font-size: 28px; text-shadow: 0 0 15px #00c3ff; margin: 20px 0; display: block; }
+
+        @keyframes pulseBtn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes burn { from { transform: scale(1); } to { transform: scale(1.3); } }
+        @keyframes fall { to { transform: translateY(110vh); } }
+
+        @media (max-width: 430px) {
+            h1 { font-size: 28px; margin-top: 30px; }
+            .chamada { font-size: 16px; padding: 0 10px; }
+            .cake-container { height: 260px; transform: scale(0.85); }
+            #btn { font-size: 16px; padding: 14px 30px; margin: 30px 0; }
+            .msgFinal { width: 90%; padding: 25px; }
+            .texto-declaracao { font-size: 15px; }
+            .frase-especial { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<img id="fundo-oculos" src="oculos.jpg">
+
+<h1>Happy Birthday Emilly! 💙</h1>
+<div class="chamada">Clique abaixo para abrir seu presente...</div>
+
+<div class="cake-container">
+    <div class="candles">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+    <div class="tier t3"><div class="drip"></div></div>
+    <div class="tier t2"><div class="drip"></div></div>
+    <div class="tier t1"><div class="drip"></div></div>
+    <div class="plate"></div>
+</div>
+
+<button id="btn">ABRIR PRESENTE 🎁</button>
+
+<div id="mensagem" class="msgFinal">
+    <div id="bg-interno-fotos"></div>
+    <div class="overlay-texto"></div>
+
+    <div class="texto-declaracao">
+        <p style="font-size: 26px; font-weight: bold; color: #00c3ff;">Feliz aniversário, Emilly! 🎉</p>
+        <p>Hoje é o seu dia, mas quem ganha o presente sou eu por ter você por perto. Já tem um bom tempo que eu guardo esse sentimento e ele só cresce. Gosto de você de um jeito que eu não imaginava.</p>
+        <p>As horas que a gente passa jogando se tornaram a parte favorita da minha rotina. É o momento em que tudo fica mais leve.</p>
+        <p>Em algum momento, sem nem perceber, você começou a ser muito mais importante pra mim do que eu imaginava.</p>
+        <span class="frase-especial">De verdade, você é muito especial pra mim. 💙</span>
+        
+        <div style="font-size: 45px; color: #00c3ff; margin: 15px 0;">ㅤㅤ</div>
+        <p style="font-weight: bold; color: #00c3ff; font-size: 20px; font-family: monospace;">[ LEVEL UP! +1 ANO ]</p>
+    </div>
+</div>
+
+<audio id="musica" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let fotos = ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg","foto6.jpg","foto7.jpg"]; 
+let idx = 0;
+const bgInterno = document.getElementById("bg-interno-fotos");
+
+function mudarFotoInterna() {
+    bgInterno.style.backgroundImage = `url('${fotos[idx]}')`;
+    idx = (idx + 1) % fotos.length;
+}
+
+setInterval(() => {
+    const c = document.createElement("div");
+    c.style.position = "fixed";
+    c.style.width = "4px";
+    c.style.height = "4px";
+    c.style.background = "#00c3ff";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "-10px";
+    c.style.zIndex = "100";
+    c.style.animation = `fall ${(Math.random()*3+2)}s linear infinite`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+}, 150);
+
+document.getElementById("btn").onclick = function() {
+    document.getElementById("fundo-oculos").style.opacity = "0";
+    document.getElementById("mensagem").style.display = "block";
+    document.querySelector(".chamada").style.display = "none";
+    
+    mudarFotoInterna();
+    setInterval(mudarFotoInterna, 4000);
+    
+    document.getElementById("musica").play();
+    this.style.display = "none";
+    
+    setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
+};
+</script>
+
+</body>
+</html>
